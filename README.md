@@ -391,5 +391,12 @@ cortex --resume 2025-12-03T18-34-11Z-43f42873-9c64-475d-b059-9cd27ad9affa
 ````
 
 
+<img width="2440" height="1292" alt="image" src="https://github.com/user-attachments/assets/9d9159ff-31ba-43de-8acf-dffcf426e45a" />
 
-````
+<img width="1394" height="387" alt="image" src="https://github.com/user-attachments/assets/9b49fd7c-5778-4fd6-9576-e78977c68384" />
+
+<img width="1214" height="978" alt="image" src="https://github.com/user-attachments/assets/a19d440d-a71f-46ac-ad12-24cf9e74a292" />
+
+
+
+

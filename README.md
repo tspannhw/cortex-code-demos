@@ -399,4 +399,9 @@ cortex --resume 2025-12-03T18-34-11Z-43f42873-9c64-475d-b059-9cd27ad9affa
 
 
 
+Reference
+
+https://www.snowflake.com/en/news/press-releases/snowflake-unveils-new-developer-tools-to-supercharge-enterprise-grade-agentic-ai-development/
+
+
 

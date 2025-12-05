@@ -1,0 +1,125 @@
+name: ADSB_FLIGHT_TRACKING
+description: Semantic view for ADS-B flight tracking analysis
+tables:
+  - name: ADSB
+    description: ADS-B flight tracking data with real-time aircraft positions and telemetry
+    base_table:
+      database: DEMO
+      schema: DEMO
+      table: ADSB
+    dimensions:
+      - name: AIRCRAFT_CATEGORY
+        synonyms:
+          - aircraft type
+          - category
+        description: Aircraft category code
+        expr: CATEGORY
+        data_type: VARCHAR(250)
+      - name: EMERGENCY_STATUS
+        synonyms:
+          - emergency
+        description: Emergency status indicator
+        expr: EMERGENCY
+        data_type: VARCHAR(250)
+      - name: FLIGHT_NUMBER
+        synonyms:
+          - callsign
+          - flight
+          - flight id
+        description: Flight number or callsign
+        expr: TRIM(FLIGHT)
+        data_type: VARCHAR(250)
+      - name: PLANE_IDENTIFIER
+        synonyms:
+          - aircraft id
+          - icao address
+          - plane id
+        description: Aircraft identifier (ICAO address)
+        expr: PLANEID
+        data_type: VARCHAR(250)
+      - name: SQUAWK_CODE
+        synonyms:
+          - transponder code
+        description: Squawk transponder code
+        expr: SQUAWK
+        data_type: VARCHAR(250)
+      - name: TIMESTAMP
+        synonyms:
+          - observation time
+          - time
+          - timestamp
+        description: Timestamp of the observation
+        expr: TRY_CAST(TS AS TIMESTAMP)
+        data_type: TIMESTAMP_NTZ(9)
+    facts:
+      - name: ALTITUDE_BAROMETRIC
+        expr: TRY_CAST(ALTBARO AS NUMBER)
+        data_type: NUMBER(38,0)
+        access_modifier: public_access
+      - name: ALTITUDE_GEOMETRIC
+        expr: TRY_CAST(ALTGEOM AS NUMBER)
+        data_type: NUMBER(38,0)
+        access_modifier: public_access
+      - name: GROUND_SPEED
+        description: Ground speed in knots
+        expr: TRY_CAST(GS AS NUMBER)
+        data_type: NUMBER(38,0)
+        access_modifier: public_access
+      - name: LATITUDE_VALUE
+        description: Latitude coordinate
+        expr: TRY_CAST(LATITUDE AS NUMBER)
+        data_type: NUMBER(38,0)
+        access_modifier: public_access
+      - name: LONGITUDE_VALUE
+        description: Longitude coordinate
+        expr: TRY_CAST(LONGITUDE AS NUMBER)
+        data_type: NUMBER(38,0)
+        access_modifier: public_access
+      - name: MESSAGE_COUNT
+        description: Number of messages received
+        expr: TRY_CAST(MESSAGES AS NUMBER)
+        data_type: NUMBER(38,0)
+        access_modifier: public_access
+      - name: RSSI_VALUE
+        description: Received signal strength indicator
+        expr: TRY_CAST(RSSI AS NUMBER)
+        data_type: NUMBER(38,0)
+        access_modifier: public_access
+      - name: TRACK_ANGLE
+        description: Track angle in degrees
+        expr: TRY_CAST(TRACK AS NUMBER)
+        data_type: NUMBER(38,0)
+        access_modifier: public_access
+      - name: VERTICAL_RATE
+        description: Barometric vertical rate
+        expr: TRY_CAST(BARORATE AS NUMBER)
+        data_type: NUMBER(38,0)
+        access_modifier: public_access
+    metrics:
+      - name: AVG_ALTITUDE
+        description: Average barometric altitude
+        expr: AVG(TRY_CAST(ALTBARO AS NUMBER))
+        access_modifier: public_access
+      - name: AVG_GROUND_SPEED
+        description: Average ground speed in knots
+        expr: AVG(TRY_CAST(GS AS NUMBER))
+        access_modifier: public_access
+      - name: MAX_ALTITUDE
+        description: Maximum altitude observed
+        expr: MAX(TRY_CAST(ALTBARO AS NUMBER))
+        access_modifier: public_access
+      - name: TOTAL_AIRCRAFT
+        description: Total number of distinct aircraft
+        expr: COUNT(DISTINCT PLANEID)
+        access_modifier: public_access
+      - name: TOTAL_FLIGHTS
+        description: Total number of distinct flights
+        expr: COUNT(DISTINCT TRIM(FLIGHT))
+        access_modifier: public_access
+      - name: TOTAL_OBSERVATIONS
+        description: Total number of observations
+        expr: COUNT(*)
+        access_modifier: public_access
+    primary_key:
+      columns:
+        - UUID

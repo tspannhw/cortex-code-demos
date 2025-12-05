@@ -1,0 +1,137 @@
+name: THERMAL_SENSOR_SEMANTIC_VIEW
+description: Semantic view for thermal sensor IoT data analysis
+tables:
+  - name: THERMAL_SENSORS
+    description: Thermal sensor data from IoT devices
+    base_table:
+      database: DEMO
+      schema: DEMO
+      table: THERMAL_SENSOR_DATA
+    dimensions:
+      - name: DEVICE_HOST
+        description: Host identifier
+        expr: HOST
+        data_type: VARCHAR(100)
+      - name: DEVICE_HOSTNAME
+        description: Hostname of the device
+        expr: HOSTNAME
+        data_type: VARCHAR(100)
+      - name: DEVICE_IP
+        description: IP address of the device
+        expr: IPADDRESS
+        data_type: VARCHAR(50)
+      - name: DEVICE_MAC
+        description: MAC address of the device
+        expr: MACADDRESS
+        data_type: VARCHAR(50)
+      - name: DEVICE_UUID
+        description: Unique identifier for each sensor reading
+        expr: UUID
+        data_type: VARCHAR(100)
+      - name: INGESTION_TIME
+        description: When the data was ingested into Snowflake
+        expr: INGESTION_TIMESTAMP
+        data_type: TIMESTAMP_NTZ(9)
+      - name: READING_DATE
+        description: Date of the reading
+        expr: DATE_TRUNC('DAY', DATETIMESTAMP)
+        data_type: TIMESTAMP_NTZ(9)
+      - name: READING_HOUR
+        description: Hour of the reading
+        expr: DATE_TRUNC('HOUR', DATETIMESTAMP)
+        data_type: TIMESTAMP_NTZ(9)
+      - name: READING_TIMESTAMP
+        description: Timestamp when the reading was taken
+        expr: DATETIMESTAMP
+        data_type: TIMESTAMP_NTZ(9)
+    facts:
+      - name: CO2_LEVEL
+        description: CO2 level in ppm from SCD4X sensor
+        expr: CO2
+        data_type: NUMBER(10,1)
+        access_modifier: public_access
+      - name: CPU_TEMP_F
+        description: CPU temperature in Fahrenheit
+        expr: CPUTEMPF
+        data_type: NUMBER(38,0)
+        access_modifier: public_access
+      - name: CPU_USAGE
+        description: CPU usage percentage
+        expr: CPU
+        data_type: NUMBER(5,1)
+        access_modifier: public_access
+      - name: EQUIV_CO2
+        description: Equivalent CO2 in ppm from SGP30 sensor
+        expr: EQUIVALENTCO2PPM
+        data_type: NUMBER(10,1)
+        access_modifier: public_access
+      - name: HUMIDITY_PCT
+        description: Relative humidity percentage from SCD4X sensor
+        expr: HUMIDITY
+        data_type: NUMBER(10,2)
+        access_modifier: public_access
+      - name: MEMORY_USAGE
+        description: Memory usage percentage
+        expr: MEMORY
+        data_type: NUMBER(5,1)
+        access_modifier: public_access
+      - name: PRESSURE_PASCALS
+        description: Atmospheric pressure in Pascals from ICP10125 sensor
+        expr: PRESSURE
+        data_type: NUMBER(10,2)
+        access_modifier: public_access
+      - name: TEMP_ICP
+        description: Temperature in Celsius from ICP10125 sensor
+        expr: TEMPERATUREICP
+        data_type: NUMBER(10,1)
+        access_modifier: public_access
+      - name: TEMPERATURE_CELSIUS
+        description: Temperature in Celsius from SCD4X sensor
+        expr: TEMPERATURE
+        data_type: NUMBER(10,4)
+        access_modifier: public_access
+      - name: VOC_LEVEL
+        description: Total VOC in ppb from SGP30 sensor
+        expr: TOTALVOCPPB
+        data_type: NUMBER(10,1)
+        access_modifier: public_access
+    metrics:
+      - name: AVG_CO2
+        description: Average CO2 level across readings
+        expr: AVG(CO2)
+        access_modifier: public_access
+      - name: AVG_HUMIDITY
+        description: Average humidity across readings
+        expr: AVG(HUMIDITY)
+        access_modifier: public_access
+      - name: AVG_PRESSURE
+        description: Average atmospheric pressure
+        expr: AVG(PRESSURE)
+        access_modifier: public_access
+      - name: AVG_TEMPERATURE
+        description: Average temperature across readings
+        expr: AVG(TEMPERATURE)
+        access_modifier: public_access
+      - name: AVG_VOC
+        description: Average VOC level across readings
+        expr: AVG(TOTALVOCPPB)
+        access_modifier: public_access
+      - name: MAX_CO2
+        description: Maximum CO2 level recorded
+        expr: MAX(CO2)
+        access_modifier: public_access
+      - name: MAX_TEMPERATURE
+        description: Maximum temperature recorded
+        expr: MAX(TEMPERATURE)
+        access_modifier: public_access
+      - name: MIN_TEMPERATURE
+        description: Minimum temperature recorded
+        expr: MIN(TEMPERATURE)
+        access_modifier: public_access
+      - name: READING_COUNT
+        description: Total number of sensor readings
+        expr: COUNT(UUID)
+        access_modifier: public_access
+    primary_key:
+      columns:
+        - UUID

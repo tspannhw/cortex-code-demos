@@ -1,3 +1,4 @@
+````
 You can resume this session with
 cortex --resume 2025-12-03T18-34-11Z-43f42873-9c64-475d-b059-9cd27ad9affa
 
@@ -298,3 +299,6 @@ I'll help you create a semantic view for the DEMO.DEMO.ADSB table. Let me start 
       COMMENT = 'Total number of messages received'
   )
   COMMENT = 'Semantic view for ADS-B aircraft tracking and flight data'
+
+
+````

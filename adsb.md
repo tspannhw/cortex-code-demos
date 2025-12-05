@@ -302,3 +302,8 @@ I'll help you create a semantic view for the DEMO.DEMO.ADSB table. Let me start 
 
 
 ````
+
+
+
+
+<img width="1619" height="1195" alt="image" src="https://github.com/user-attachments/assets/414f07a8-86a4-45ee-9a17-d5f562acb3d1" />

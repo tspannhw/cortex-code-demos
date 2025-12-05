@@ -398,6 +398,8 @@ cortex --resume 2025-12-03T18-34-11Z-43f42873-9c64-475d-b059-9cd27ad9affa
 <img width="1214" height="978" alt="image" src="https://github.com/user-attachments/assets/a19d440d-a71f-46ac-ad12-24cf9e74a292" />
 
 
+https://app.snowflake.com/sfsenorthamerica/tspann_aws1/#/cortex/analyst/databases/DEMO/schemas/DEMO/semanticView/THERMAL_SENSOR_SEMANTIC_VIEW?ref=snowsight_shared
+
 
 Reference
 
